@@ -60,6 +60,10 @@ async Task GetResponseFromOpenAI(string systemMessage, string userMessage)
 OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
 
     // Format and send the request to the model
+    Console.WriteLine("\nAdding grounding context from grounding.txt");
+string groundingText = System.IO.File.ReadAllText("grounding.txt");
+userMessage = groundingText + userMessage;
+    
 var chatCompletionsOptions = new ChatCompletionsOptions()
 {
     Messages =
